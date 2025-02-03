@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rdza
+  labels:
+    app: rdza
+spec:
+  replicas: 3 # Define the number of replicas (pods)
+  selector:
+    matchLabels:
+      app: rdza
+  template:
+    metadata:
+      labels:
+        app: rdza
+    spec:
+      containers:
+      - name: rdza
+        image: your-docker-repo/rdza:v1 # TODO: replace
+        ports:
+        - containerPort: 3030
+        env:
+        - name: APP_ENV
+          value: "prod"  # Set the app environment to production
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+---
